@@ -21,7 +21,6 @@ function Header() {
               Log Out
             </button>
           </li>
-          {/* Adicione mais itens de menu conforme necessário */}
         </ul>
       </nav>
     </header>

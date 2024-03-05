@@ -11,18 +11,13 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircleOutlined';
-import MailIcon from '@mui/icons-material/Mail';
 import Purchase from '@mui/icons-material/ShoppingCartOutlined';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
   marginRight: theme.spacing(2),
   marginLeft: 0,
   width: '100%',
@@ -119,26 +114,6 @@ export default function NavBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           size="large"
@@ -162,7 +137,13 @@ export default function NavBar() {
             variant="h6"
             noWrap
             component="div"
-            sx={{ display: { xs: 'none', sm: 'block' }, margin: ' 0 3rem' }}
+            sx={{
+              display: { xs: 'none', sm: 'block' },
+              margin: ' 0 3rem',
+              fontFamily: 'RussoOne',
+              fontWeight: '400',
+              fontSize: '40px',
+            }}
           >
             DEVMARKET
           </Typography>
@@ -177,10 +158,38 @@ export default function NavBar() {
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{
+              display: { xs: 'none', sm: 'block' },
+
+              fontFamily: 'Quicksand',
+              fontWeight: '700',
+              fontSize: '16px',
+            }}
+          >
+            Home
+          </Typography>
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{
+              display: { xs: 'none', sm: 'block' },
+              margin: ' 0 2rem',
+              fontFamily: 'Quicksand',
+              fontWeight: '700',
+              fontSize: '16px',
+            }}
+          >
+            Contato
+          </Typography>
           <Box sx={{ display: { xs: 'none', md: 'flex' }, flexGrow: 0.1 }}>
             <IconButton
               size="large"
-              aria-label="show 4 new mails"
+              aria-label="show 4 new itens"
               color="inherit"
             >
               <Badge badgeContent={4} color="error">
