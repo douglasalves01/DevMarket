@@ -13,6 +13,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircleOutlined';
 import Purchase from '@mui/icons-material/ShoppingCartOutlined';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -52,6 +53,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function NavBar() {
+  const { logout } = useAuth0();
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
@@ -69,6 +72,7 @@ export default function NavBar() {
 
   const handleMenuClose = () => {
     setAnchorEl(null);
+    logout({ logoutParams: { returnTo: window.location.origin } });
     handleMobileMenuClose();
   };
 
