@@ -15,7 +15,12 @@ const ColorButton = styled(Button)<ButtonProps>(() => ({
 export default function ButtonPrimary({ texto }: ButtonPrimaryProps) {
   return (
     <Stack spacing={2} direction="row">
-      <ColorButton variant="contained">{texto}</ColorButton>
+      <ColorButton
+        variant="contained"
+        sx={{ fontFamily: 'Quicksand', lineHeight: '24px', fontWeight: '700' }}
+      >
+        {texto}
+      </ColorButton>
     </Stack>
   );
 }

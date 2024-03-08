@@ -32,6 +32,8 @@ export default function Introduction() {
               color: '#252525',
               fontSize: { md: '2.5rem', xl: '3.5rem' },
               marginBottom: '1.2rem',
+              fontFamily: 'Russo One',
+              lineHeight: '67.2px',
             }}
           >
             Uma headline de tamanho médio
@@ -42,6 +44,8 @@ export default function Introduction() {
               color: '#252525',
               fontSize: { md: '1rem', xl: '1.4rem' },
               marginBottom: '1.5rem',
+              fontFamily: 'Quicksand',
+              lineHeight: '27px',
             }}
           >
             Praesent a cursus urna. Pellentesque vitae dignissim felis.
