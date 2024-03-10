@@ -5,6 +5,7 @@ import { ErrorDescription, ObjectId } from "mongodb";
 export class ProductController {
   static async getProductId(req: Request, res: Response) {
     const productId = req.params.id;
+
     try {
       const data = await client
         .db("dev-market")

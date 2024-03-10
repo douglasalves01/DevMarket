@@ -1,5 +1,6 @@
 import Home from '../pages/Home';
 import Login from '../pages/Login';
+import ProductPage from '../pages/ProductPage';
 
 const routes = [
   {
@@ -16,6 +17,11 @@ const routes = [
   {
     path: '/home',
     component: Home,
+    protected: true,
+  },
+  {
+    path: '/product/:id',
+    component: ProductPage,
     protected: true,
   },
 ];

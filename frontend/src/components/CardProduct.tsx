@@ -18,9 +18,15 @@ export default function CardProduct({
   image,
 }: Product) {
   const formatPrice: string = `$${parseFloat(price).toFixed(2)}`;
-
+  const handleOpenUrl = (url: string) => {
+    window.open(url, '_blank');
+  };
   return (
-    <Card sx={{ maxWidth: 345, marginRight: '10px' }} key={id}>
+    <Card
+      sx={{ maxWidth: 345, marginRight: '10px' }}
+      key={id}
+      onClick={() => handleOpenUrl(`/product/${id}`)}
+    >
       <CardActionArea>
         <CardMedia component="img" height="140" image={image} alt={product} />
         <CardContent>

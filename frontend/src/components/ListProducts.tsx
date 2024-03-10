@@ -1,6 +1,6 @@
 import Slider from 'react-slick';
 import CardProduct from './CardProduct';
-import { useState } from 'react';
+import { useState, useEffect } from 'react'; // Adicione o useEffect
 import axios, { AxiosResponse } from 'axios';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
@@ -13,9 +13,11 @@ interface Product {
   image: string;
   valor: string;
 }
+
 interface Category {
   categoria: string;
 }
+
 export default function ListProducts({ categoria }: Category) {
   const settings = {
     dots: true,
@@ -25,27 +27,33 @@ export default function ListProducts({ categoria }: Category) {
     slidesToScroll: 1,
   };
   const [products, setProducts] = useState([]);
-  axios
-    .get(`http://localhost:3000/product/all`)
-    .then((response: AxiosResponse) => {
-      if (response.status === 200) {
-        const responseData = response.data.data;
-        const productsData = responseData.map((item: Product) => ({
-          id: item._id,
-          produto: item.produto,
-          categoria: item.categoria,
-          image: item.image,
-          valor: item.valor,
-        }));
 
-        const filteredProducts = categoria
-          ? productsData.filter(
-              (product: Product) => product.categoria === categoria
-            )
-          : productsData;
-        setProducts(filteredProducts);
-      }
-    });
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/product/all`)
+      .then((response: AxiosResponse) => {
+        if (response.status === 200) {
+          const responseData = response.data.data;
+          const productsData = responseData.map((item: Product) => ({
+            id: item._id,
+            produto: item.produto,
+            categoria: item.categoria,
+            image: item.image,
+            valor: item.valor,
+          }));
+
+          const filteredProducts = categoria
+            ? productsData.filter(
+                (product: Product) => product.categoria === categoria
+              )
+            : productsData;
+          setProducts(filteredProducts);
+        }
+      })
+      .catch((error) => {
+        console.log(error.response.data.message);
+      });
+  }, [categoria]); // Adicione a categoria como uma dependência do useEffect
 
   const sliderStyle = {
     width: '85%',
