@@ -6,18 +6,22 @@ import AccordionUsage from './Accordion';
 import CardMedia from '@mui/material/CardMedia';
 
 interface Product {
+  id: string;
   produto: string;
   valor: string;
   rating: string;
   description: string;
   image: string;
+  onAddToCart: void;
 }
 export default function InfoProducts({
+  id,
   produto,
   valor,
   rating,
   description,
   image,
+  onAddToCart,
 }: Product) {
   const productTitle = produto.charAt(0).toUpperCase() + produto.slice(1);
   const formatPrice: string = `$${parseFloat(valor).toFixed(2)}`;
@@ -90,6 +94,9 @@ export default function InfoProducts({
             width="100%"
             height="60px"
             borderRadius="100px"
+            onClick={() => {
+              onAddToCart(id);
+            }}
           />
           <ButtonSecondary
             texto="Comprar agora"

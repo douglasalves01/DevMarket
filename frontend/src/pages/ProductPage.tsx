@@ -14,8 +14,16 @@ interface Product {
 }
 
 export default function ProductPage() {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<Product | null>(null);
+  const [cartCount, setCartCount] = useState<number>(() => {
+    const storedCount = localStorage.getItem('cartCount');
+    return storedCount ? parseInt(storedCount, 10) : 0;
+  });
+  const [cartItems, setCartItems] = useState<string[]>(() => {
+    const storedItems = localStorage.getItem('cartItems');
+    return storedItems ? JSON.parse(storedItems) : [];
+  });
 
   useEffect(() => {
     axios
@@ -38,11 +46,25 @@ export default function ProductPage() {
       });
   }, [id]);
 
+  useEffect(() => {
+    localStorage.setItem('cartCount', cartCount.toString());
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  }, [cartCount, cartItems]);
+
+  const handleAddToCart = () => {
+    setCartCount((prevCount) => prevCount + 1);
+    if (product) {
+      setCartItems([...cartItems, product.id]);
+    }
+  };
+
   return (
     <>
       <NavBar />
       {product && (
         <InfoProducts
+          onAddToCart={handleAddToCart}
+          id={product.id}
           key={product.id}
           produto={product.produto}
           rating="5"

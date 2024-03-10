@@ -14,7 +14,7 @@ import AccountCircle from '@mui/icons-material/AccountCircleOutlined';
 import Purchase from '@mui/icons-material/ShoppingCartOutlined';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { useAuth0 } from '@auth0/auth0-react';
-
+import { useState } from 'react';
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -54,7 +54,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function NavBar() {
   const { logout } = useAuth0();
-
+  const [cartCount, setCartCount] = useState<number>(() => {
+    const storedCount = localStorage.getItem('cartCount');
+    return storedCount ? parseInt(storedCount, 10) : 0;
+  });
+  const [cartItems, setCartItems] = useState<string[]>(() => {
+    const storedItems = localStorage.getItem('cartItems');
+    return storedItems ? JSON.parse(storedItems) : [];
+  });
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
@@ -196,7 +203,7 @@ export default function NavBar() {
               aria-label="show 4 new itens"
               color="inherit"
             >
-              <Badge badgeContent={4} color="error">
+              <Badge badgeContent={cartCount} color="error">
                 <Purchase sx={{ fontSize: '30px' }} />
               </Badge>
             </IconButton>
