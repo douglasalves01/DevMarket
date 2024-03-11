@@ -4,12 +4,14 @@ import ButtonSecondary from './ButtonSecondary';
 import Divider from '@mui/material/Divider';
 import AccordionUsage from './Accordion';
 import CardMedia from '@mui/material/CardMedia';
+import Rating from '@mui/material/Rating';
+import StarIcon from '@mui/icons-material/Star';
 
 interface Product {
   id: string;
   produto: string;
   valor: string;
-  rating: string;
+  rating: number;
   description: string;
   image: string;
   onAddToCart: void;
@@ -75,7 +77,12 @@ export default function InfoProducts({
           >
             {formatPrice}
           </Typography>
-          <Typography>{rating}</Typography>
+          <Rating
+            name="avaliate"
+            value={rating}
+            readOnly
+            icon={<StarIcon sx={{ color: '#7E5686' }} />}
+          />
           <Typography
             sx={{
               fontFamily: 'Quicksand',

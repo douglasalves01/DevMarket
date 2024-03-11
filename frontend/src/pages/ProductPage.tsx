@@ -11,6 +11,8 @@ interface Product {
   categoria: string;
   image: string;
   valor: string;
+  rating: number;
+  handleAddToCart?: void;
 }
 
 export default function ProductPage() {
@@ -37,6 +39,7 @@ export default function ProductPage() {
             categoria: responseData.categoria,
             image: responseData.image,
             valor: responseData.valor,
+            rating: 3,
           };
           setProduct(productData);
         }
@@ -60,19 +63,20 @@ export default function ProductPage() {
 
   return (
     <>
-      <NavBar />
+      <NavBar cartCount={cartCount} cartItems={cartItems} />
       {product && (
         <InfoProducts
           onAddToCart={handleAddToCart}
           id={product.id}
           key={product.id}
           produto={product.produto}
-          rating="5"
+          rating={product.rating}
           valor={product.valor}
           image={product.image}
           description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor tortor magna, luctus venenatis magna pretium et. Donec mauris nisl, suscipit et maximus et, efficitur ut elit. Phasellus sed lacinia arcu. Nullam massa mi, auctor nec diam ac, molestie lacinia nunc."
         />
       )}
+
       <Footer />
     </>
   );

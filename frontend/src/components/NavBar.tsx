@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -14,7 +15,8 @@ import AccountCircle from '@mui/icons-material/AccountCircleOutlined';
 import Purchase from '@mui/icons-material/ShoppingCartOutlined';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { useAuth0 } from '@auth0/auth0-react';
-import { useState } from 'react';
+import ModalCart from './ModalCart';
+
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -52,16 +54,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function NavBar() {
+export default function NavBar({ cartCount, cartItems }) {
   const { logout } = useAuth0();
-  const [cartCount, setCartCount] = useState<number>(() => {
-    const storedCount = localStorage.getItem('cartCount');
-    return storedCount ? parseInt(storedCount, 10) : 0;
-  });
-  const [cartItems, setCartItems] = useState<string[]>(() => {
-    const storedItems = localStorage.getItem('cartItems');
-    return storedItems ? JSON.parse(storedItems) : [];
-  });
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
@@ -139,11 +134,19 @@ export default function NavBar() {
       </MenuItem>
     </Menu>
   );
+  //teste modal
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
+  //fim teste modal
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar sx={{ position: 'static' }}>
-        <Toolbar sx={{ background: '#A5AAD9', color: '#252525' }}>
+        <Toolbar
+          sx={{ background: '#A5AAD9', color: '#252525' }}
+          onMouseLeave={handleClose}
+        >
           <Typography
             variant="h6"
             noWrap
@@ -202,6 +205,7 @@ export default function NavBar() {
               size="large"
               aria-label="show 4 new itens"
               color="inherit"
+              onMouseEnter={handleOpen}
             >
               <Badge badgeContent={cartCount} color="error">
                 <Purchase sx={{ fontSize: '30px' }} />
@@ -230,6 +234,12 @@ export default function NavBar() {
             >
               <MoreIcon />
             </IconButton>
+            <ModalCart
+              cartCount={cartCount}
+              cartItem={cartItems}
+              open={open}
+              handleClose={handleClose}
+            />
           </Box>
         </Toolbar>
       </AppBar>
