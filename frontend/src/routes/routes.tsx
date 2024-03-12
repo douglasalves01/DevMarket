@@ -1,6 +1,9 @@
+import FinalPurchase from '../pages/FinalPurchase';
 import Home from '../pages/Home';
 import Login from '../pages/Login';
 import ProductPage from '../pages/ProductPage';
+import { CheckoutForm } from '../services/stripe/CheckForm';
+import { Return } from '../services/stripe/Return';
 
 const routes = [
   {
@@ -23,6 +26,21 @@ const routes = [
     path: '/product/:id',
     component: ProductPage,
     protected: true,
+  },
+  {
+    path: '/purchase',
+    component: FinalPurchase,
+    protected: true,
+  },
+  {
+    path: '/checkout',
+    component: CheckoutForm,
+    protected: false,
+  },
+  {
+    path: '/return',
+    component: Return,
+    protected: false,
   },
 ];
 

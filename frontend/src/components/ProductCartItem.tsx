@@ -10,7 +10,14 @@ interface Product {
   produto: string;
   quantity: string;
 }
-export default function ProductCartItem({ cartItem, onUpdateTotalPrice }) {
+interface Cart {
+  cartItem: string[];
+  onUpdateTotalPrice: (parametro1: number) => number;
+}
+export default function ProductCartItem({
+  cartItem,
+  onUpdateTotalPrice,
+}: Cart) {
   // Estado para armazenar as informações dos produtos
   const [productInfo, setProductInfo] = useState<{ [key: string]: Product }>(
     {}
@@ -59,7 +66,7 @@ export default function ProductCartItem({ cartItem, onUpdateTotalPrice }) {
       <CardMedia
         sx={{
           width: '100px',
-          height: { md: '25px', xl: '80px' },
+          height: { md: '50px', xl: '80px' },
           border: '1px solid #E4E7E9',
         }}
         component="img"
@@ -97,9 +104,7 @@ export default function ProductCartItem({ cartItem, onUpdateTotalPrice }) {
               color: '#BA3C3D',
             }}
           >
-            {(
-              parseFloat(productData.valor) * parseFloat(productData.quantity)
-            ).toFixed(2)}
+            {parseFloat(productData.valor).toFixed(2)}
           </Typography>
         </Box>
       </Box>

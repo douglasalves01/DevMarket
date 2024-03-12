@@ -19,7 +19,7 @@ export default function CardProduct({
 }: Product) {
   const formatPrice: string = `$${parseFloat(price).toFixed(2)}`;
   const handleOpenUrl = (url: string) => {
-    window.open(url, '_blank');
+    window.open(url, '_self');
   };
   return (
     <Card

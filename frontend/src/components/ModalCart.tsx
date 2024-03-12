@@ -5,6 +5,8 @@ import ButtonSecondary from './ButtonSecondary';
 import Modal from '@mui/material/Modal';
 import ProductCartItem from './ProductCartItem';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 interface ModalCart {
   open: void;
   handleClose: void;
@@ -29,7 +31,7 @@ const ModalCart = ({ open, handleClose, cartCount, cartItem }: ModalCart) => {
       <Box
         sx={{
           position: 'absolute',
-          top: { md: '10%', xl: '6.8%' },
+          top: { md: '7%', xl: '6.8%' },
           right: '8%',
           bgcolor: 'background.paper',
           width: '376px',
@@ -92,21 +94,23 @@ const ModalCart = ({ open, handleClose, cartCount, cartItem }: ModalCart) => {
             R$ {totalPrice.toFixed(2)}
           </Typography>
         </Box>
-        <ButtonSecondary
-          sx={{
-            fontFamily: 'Public Sans',
-            fontWeight: '700',
-            fontSize: '14px',
-            lineHeight: '48px',
-          }}
-          texto="FINALIZAR A COMPRA ->"
-          background="#7E5686"
-          width="100%"
-          height="48px"
-          borderRadius="2px"
-          border="none"
-          textColor="#ffffff"
-        />
+        <Link to="/purchase" style={{ textDecoration: 'none' }}>
+          <ButtonSecondary
+            sx={{
+              fontFamily: 'Public Sans',
+              fontWeight: '700',
+              fontSize: '14px',
+              lineHeight: '48px',
+            }}
+            texto="FINALIZAR A COMPRA ->"
+            background="#7E5686"
+            width="100%"
+            height="48px"
+            borderRadius="2px"
+            border="none"
+            textColor="#ffffff"
+          />
+        </Link>
       </Box>
     </Modal>
   );

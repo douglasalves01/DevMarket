@@ -53,8 +53,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
-
-export default function NavBar({ cartCount, cartItems }) {
+interface Cart {
+  cartCount: string;
+  cartItems: string[];
+}
+export default function NavBar({ cartCount, cartItems }: Cart) {
   const { logout } = useAuth0();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
