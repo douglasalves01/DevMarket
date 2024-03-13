@@ -1,8 +1,14 @@
 import Box from '@mui/material/Box';
-import ButtonPrimary from './ButtonPrimary';
+import ButtonPrimary from './buttons/ButtonPrimary';
 import Typography from '@mui/material/Typography';
+import { useNavigate } from 'react-router-dom';
 
 export default function Introduction() {
+  const navigate = useNavigate();
+
+  const handleButtonClick = () => {
+    navigate('/products');
+  };
   return (
     <Box
       component="section"
@@ -52,7 +58,7 @@ export default function Introduction() {
             Pellentesque habitant morbi tristique senectus et netus et malesuada
             fames ac turpis egestas. Cras efficitur ac risus non vulputate.
           </Typography>
-          <ButtonPrimary texto="Comece a olhar" />
+          <ButtonPrimary texto="Comece a olhar" onClick={handleButtonClick} />
         </Box>
       </Box>
       <Box sx={{ width: '50%', height: '100%' }}>

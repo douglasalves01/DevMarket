@@ -2,7 +2,7 @@ import { styled } from '@mui/material/styles';
 import Button, { ButtonProps } from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 
-interface ButtonPrimaryProps {
+interface ButtonPrimaryProps extends ButtonProps {
   texto: string;
 }
 const ColorButton = styled(Button)<ButtonProps>(() => ({
@@ -12,12 +12,13 @@ const ColorButton = styled(Button)<ButtonProps>(() => ({
   height: '50px',
 }));
 
-export default function ButtonPrimary({ texto }: ButtonPrimaryProps) {
+export default function ButtonPrimary({ texto, onClick }: ButtonPrimaryProps) {
   return (
     <Stack spacing={2} direction="row">
       <ColorButton
         variant="contained"
         sx={{ fontFamily: 'Quicksand', lineHeight: '24px', fontWeight: '700' }}
+        onClick={onClick}
       >
         {texto}
       </ColorButton>

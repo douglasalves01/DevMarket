@@ -1,11 +1,9 @@
-import axios, { AxiosResponse } from 'axios';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
-import ProductCartItem from '../components/ProductCartItem';
+import ProductCartItem from '../components/products/ProductCartItem';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import FormStripe from '../components/FormStripe';
 import { CheckoutForm } from '../services/stripe/CheckForm';
 
 export default function FinalPurchase() {

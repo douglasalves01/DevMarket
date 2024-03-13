@@ -1,7 +1,7 @@
 import NavBar from '../components/NavBar';
 import Introduction from '../components/Introduction';
 import Footer from '../components/Footer';
-import ListProducts from '../components/ListProducts';
+import ListProducts from '../components/products/ListProducts';
 import HeadlineProducts from '../components/HeadlineProducts';
 import Newsletter from '../components/Newsletter';
 import { useState, useEffect } from 'react';

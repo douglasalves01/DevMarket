@@ -1,31 +1,27 @@
 import FinalPurchase from '../pages/FinalPurchase';
 import Home from '../pages/Home';
-import Login from '../pages/Login';
 import ProductPage from '../pages/ProductPage';
+import Product from '../pages/Products';
 import { CheckoutForm } from '../services/stripe/CheckForm';
 import { Return } from '../services/stripe/Return';
 
 const routes = [
   {
     path: '/',
-    component: Login,
+    component: Home,
     protected: false,
     redirect: true,
   },
-  {
-    path: '/login',
-    component: Login,
-    protected: false,
-  },
+
   {
     path: '/home',
     component: Home,
-    protected: true,
+    protected: false,
   },
   {
     path: '/product/:id',
     component: ProductPage,
-    protected: true,
+    protected: false,
   },
   {
     path: '/purchase',
@@ -40,6 +36,11 @@ const routes = [
   {
     path: '/return',
     component: Return,
+    protected: false,
+  },
+  {
+    path: '/products',
+    component: Product,
     protected: false,
   },
 ];

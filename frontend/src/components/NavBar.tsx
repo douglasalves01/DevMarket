@@ -15,7 +15,8 @@ import AccountCircle from '@mui/icons-material/AccountCircleOutlined';
 import Purchase from '@mui/icons-material/ShoppingCartOutlined';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { useAuth0 } from '@auth0/auth0-react';
-import ModalCart from './ModalCart';
+import ModalCart from './modal/ModalCart';
+import { useNavigate } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -54,11 +55,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 interface Cart {
-  cartCount: string;
-  cartItems: string[];
+  cartCount?: string;
+  cartItems?: string[];
 }
 export default function NavBar({ cartCount, cartItems }: Cart) {
-  const { logout } = useAuth0();
+  const { isAuthenticated, logout, loginWithRedirect } = useAuth0();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
@@ -102,7 +103,11 @@ export default function NavBar({ cartCount, cartItems }: Cart) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+      {isAuthenticated ? (
+        <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+      ) : (
+        <MenuItem onClick={() => loginWithRedirect()}>Login</MenuItem>
+      )}
     </Menu>
   );
 
@@ -143,6 +148,11 @@ export default function NavBar({ cartCount, cartItems }: Cart) {
   const handleClose = () => setOpen(false);
 
   //fim teste modal
+  const navigate = useNavigate();
+
+  const handleButtonClick = () => {
+    navigate('/home');
+  };
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar sx={{ position: 'static' }}>
@@ -176,15 +186,16 @@ export default function NavBar({ cartCount, cartItems }: Cart) {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Typography
+            onClick={handleButtonClick}
             variant="h6"
             noWrap
             component="div"
             sx={{
               display: { xs: 'none', sm: 'block' },
-
               fontFamily: 'Quicksand',
               fontWeight: '700',
               fontSize: '16px',
+              cursor: 'pointer',
             }}
           >
             Home
@@ -199,6 +210,7 @@ export default function NavBar({ cartCount, cartItems }: Cart) {
               fontFamily: 'Quicksand',
               fontWeight: '700',
               fontSize: '16px',
+              cursor: 'pointer',
             }}
           >
             Contato
@@ -237,12 +249,15 @@ export default function NavBar({ cartCount, cartItems }: Cart) {
             >
               <MoreIcon />
             </IconButton>
-            <ModalCart
-              cartCount={cartCount}
-              cartItem={cartItems}
-              open={open}
-              handleClose={handleClose}
-            />
+
+            {cartCount && (
+              <ModalCart
+                cartCount={cartCount}
+                cartItem={cartItems}
+                open={open}
+                handleClose={handleClose}
+              />
+            )}
           </Box>
         </Toolbar>
       </AppBar>

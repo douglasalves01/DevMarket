@@ -1,6 +1,6 @@
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import ButtonSecondary from './ButtonSecondary';
+import ButtonSecondary from './buttons/ButtonSecondary';
 import TextField from '@mui/material/TextField';
 
 export default function Newsletter() {

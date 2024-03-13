@@ -1,9 +1,9 @@
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
-import ButtonSecondary from './ButtonSecondary';
+import ButtonSecondary from '../buttons/ButtonSecondary';
 import Modal from '@mui/material/Modal';
-import ProductCartItem from './ProductCartItem';
+import ProductCartItem from '../products/ProductCartItem';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 

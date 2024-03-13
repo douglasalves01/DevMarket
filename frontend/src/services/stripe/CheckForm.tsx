@@ -4,6 +4,7 @@ import {
   EmbeddedCheckout,
 } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+
 const CHAVE_STRIPE: string = import.meta.env.VITE_CHAVE_STRIPE ?? '';
 
 export const CheckoutForm = () => {
@@ -19,7 +20,7 @@ export const CheckoutForm = () => {
   }, []);
 
   return (
-    <div id="checkout">
+    <div id="checkout" style={{ maxWidth: '400px', margin: '0 auto' }}>
       {clientSecret && (
         <EmbeddedCheckoutProvider
           stripe={stripePromise}

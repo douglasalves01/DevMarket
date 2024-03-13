@@ -21,7 +21,7 @@ function App() {
         <Route
           path="/"
           element={
-            isAuthenticated ? <Navigate to="/home" /> : <Navigate to="/login" />
+            isAuthenticated ? <Navigate to="/home" /> : <Navigate to="/home" />
           }
         />
         {routes.map((route, index) => (
